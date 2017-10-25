@@ -40,7 +40,7 @@ namespace UWP_FirstApp
             {
                 httpResponse = await httpClient.GetAsync(uri);
                 httpResponse.EnsureSuccessStatusCode();
-                httpResponseBody = await httpResponse.Content.ReadAsStringAsync();                
+                httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
             }
             catch (Exception ex)
             {
@@ -49,19 +49,24 @@ namespace UWP_FirstApp
             var imageUrls = GetListImage(httpResponseBody);
             for (var i = 0; i < imageUrls.Count; i++)
             {
+                MainGrid.RowDefinitions.Add(new RowDefinition
+                {
+                    Height = GridLength.Auto
+                });
                 var image = new Image
                 {
-                    Source = new BitmapImage(imageUrls[i])
+                    Source = new BitmapImage(imageUrls[i])                    
                 };
-                ImageList.Children.Add(image);
-                }
+                Grid.SetRow(image, i);
+                MainGrid.Children.Add(image);
+            }
         }
         private List<Uri> GetListImage(string html)
         {
             string pattern = @"_fade_(.*?)\n(.*?)\n(.*?)src=""(.*?)""";
             var matchs = Regex.Matches(html, pattern);
             List<Uri> listImage = new List<Uri>();
-            for(var i = 0; i < matchs.Count; i++)
+            for (var i = 0; i < matchs.Count; i++)
             {
                 listImage.Add(new Uri("https:" + matchs[i].Groups[4].Value));
             }
