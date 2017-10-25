@@ -49,8 +49,10 @@ namespace UWP_FirstApp
             var imageUrls = GetListImage(httpResponseBody);
             for (var i = 0; i < imageUrls.Count; i++)
             {
-                var image = new Image();
-                image.Source = new BitmapImage(imageUrls[i]);
+                var image = new Image
+                {
+                    Source = new BitmapImage(imageUrls[i])
+                };
                 ImageList.Children.Add(image);
                 }
         }
@@ -61,7 +63,7 @@ namespace UWP_FirstApp
             List<Uri> listImage = new List<Uri>();
             for(var i = 0; i < matchs.Count; i++)
             {
-                listImage.Add(new Uri(this.BaseUri, matchs[i].Groups[4].Value));
+                listImage.Add(new Uri("https:" + matchs[i].Groups[4].Value));
             }
             return listImage;
         }
