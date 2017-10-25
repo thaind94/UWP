@@ -10,9 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button x:Name="SayHello" Content="Get Content" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="100" Width="200" Click="SayHello_ClickAsync"/>
         <ListView Margin="0,250,0,0">
-            <StackPanel x:Name="ImageList">
-                
-            </StackPanel>
+            <StackPanel x:Name="ImageList" Height="737" Width="1479" />
         </ListView>
 
     </Grid>
