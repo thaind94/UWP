@@ -49,17 +49,19 @@ namespace UWP_FirstApp
             var imageUrls = GetListImage(httpResponseBody);
             for (var i = 0; i < imageUrls.Count; i++)
             {
-                MainGrid.RowDefinitions.Add(new RowDefinition
-                {
-                    Height = GridLength.Auto
-                });
+                //MainGrid.RowDefinitions.Add(new RowDefinition
+                //{
+                //    Height = GridLength.Auto
+                //});
                 var image = new Image
                 {
                     Source = new BitmapImage(imageUrls[i])                    
                 };
-                Grid.SetRow(image, i);
-                MainGrid.Children.Add(image);
+                //Grid.SetRow(image, i);
+                slideGrid.Children.Add(image);                
             }
+            zing_slide.Height = slideGrid.Height;
+            
         }
         private List<Uri> GetListImage(string html)
         {

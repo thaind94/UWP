@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="SayHello_ClickAsync">
 
-    <ScrollViewer>
-        <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        </Grid>
-    </ScrollViewer>
+    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <FlipView x:Name="zing_slide" VerticalAlignment="Top" Height="400">
+            <Grid x:Name="slideGrid"></Grid>
+        </FlipView>
+    </Grid>
 </Page>
