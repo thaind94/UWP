@@ -30,49 +30,54 @@ namespace UWP_FirstApp
             this.InitializeComponent();
         }
 
-        private async void SayHello_ClickAsync(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-            Uri uri = new Uri("https://tv.zing.vn");
-            string httpResponseBody = "";
-            try
-            {
-                httpResponse = await httpClient.GetAsync(uri);
-                httpResponse.EnsureSuccessStatusCode();
-                httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-            }
-            catch (Exception ex)
-            {
-                httpResponseBody = "ERROR" + ex.HResult.ToString("X") + "Message" + ex.Message;
-            }
-            var imageUrls = GetListImage(httpResponseBody);
-            for (var i = 0; i < imageUrls.Count; i++)
-            {
-                //MainGrid.RowDefinitions.Add(new RowDefinition
-                //{
-                //    Height = GridLength.Auto
-                //});
-                var image = new Image
-                {
-                    Source = new BitmapImage(imageUrls[i])                    
-                };
-                //Grid.SetRow(image, i);
-                slideGrid.Children.Add(image);                
-            }
-            zing_slide.Height = slideGrid.Height;
-            
+            splitView.IsPaneOpen = !splitView.IsPaneOpen;
         }
-        private List<Uri> GetListImage(string html)
-        {
-            string pattern = @"_fade_(.*?)\n(.*?)\n(.*?)src=""(.*?)""";
-            var matchs = Regex.Matches(html, pattern);
-            List<Uri> listImage = new List<Uri>();
-            for (var i = 0; i < matchs.Count; i++)
-            {
-                listImage.Add(new Uri("https:" + matchs[i].Groups[4].Value));
-            }
-            return listImage;
-        }
+
+        //private async void SayHello_ClickAsync(object sender, RoutedEventArgs e)
+        //{
+        //    HttpClient httpClient = new HttpClient();
+        //    HttpResponseMessage httpResponse = new HttpResponseMessage();
+        //    Uri uri = new Uri("https://tv.zing.vn");
+        //    string httpResponseBody = "";
+        //    try
+        //    {
+        //        httpResponse = await httpClient.GetAsync(uri);
+        //        httpResponse.EnsureSuccessStatusCode();
+        //        httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        httpResponseBody = "ERROR" + ex.HResult.ToString("X") + "Message" + ex.Message;
+        //    }
+        //    var imageUrls = GetListImage(httpResponseBody);
+        //    for (var i = 0; i < imageUrls.Count; i++)
+        //    {
+        //        //MainGrid.RowDefinitions.Add(new RowDefinition
+        //        //{
+        //        //    Height = GridLength.Auto
+        //        //});
+        //        var image = new Image
+        //        {
+        //            Source = new BitmapImage(imageUrls[i])                    
+        //        };
+        //        //Grid.SetRow(image, i);
+        //        slideGrid.Children.Add(image);                
+        //    }
+        //    zing_slide.Height = slideGrid.Height;
+
+        //}
+        //private List<Uri> GetListImage(string html)
+        //{
+        //    string pattern = @"_fade_(.*?)\n(.*?)\n(.*?)src=""(.*?)""";
+        //    var matchs = Regex.Matches(html, pattern);
+        //    List<Uri> listImage = new List<Uri>();
+        //    for (var i = 0; i < matchs.Count; i++)
+        //    {
+        //        listImage.Add(new Uri("https:" + matchs[i].Groups[4].Value));
+        //    }
+        //    return listImage;
+        //}
     }
 }

@@ -5,11 +5,25 @@
     xmlns:local="using:UWP_FirstApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="SayHello_ClickAsync">
+    mc:Ignorable="d">
 
-    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView x:Name="zing_slide" VerticalAlignment="Top" Height="400">
-            <Grid x:Name="slideGrid"></Grid>
-        </FlipView>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <Button Content="Click me" Click="Button_Click"/>
+        <SplitView x:Name="splitView" CompactPaneLength="50" DisplayMode="CompactOverlay" OpenPaneLength="200" PaneBackground="BurlyWood">
+            <SplitView.Pane>
+                <StackPanel>
+                    <TextBlock Text="One"/>
+                    <TextBlock Text="Two"/>
+                    <TextBlock Text="Three"/>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <StackPanel>
+                    <TextBlock Text="Four"/>
+                    <TextBlock Text="Five"/>
+                    <TextBlock Text="Six"/>
+                </StackPanel>
+            </SplitView.Content>
+        </SplitView>
+    </StackPanel>
 </Page>
