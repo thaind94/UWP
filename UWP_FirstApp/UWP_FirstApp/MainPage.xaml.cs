@@ -28,12 +28,44 @@ namespace UWP_FirstApp
         public MainPage()
         {
             this.InitializeComponent();
+            mainFrame.Navigate(typeof(Page1));
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void hamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             splitView.IsPaneOpen = !splitView.IsPaneOpen;
         }
+
+        private void IconsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Page1.IsSelected) mainFrame.Navigate(typeof(Page1));
+            else if (Page2.IsSelected) mainFrame.Navigate(typeof(Page2));
+            else mainFrame.Navigate(typeof(Page3));
+        }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    splitView.IsPaneOpen = !splitView.IsPaneOpen;
+        //}
+
+        //private void Home_Click(object sender, RoutedEventArgs e)
+        //{
+        //    mainFrame.Navigate(typeof(Page1));
+        //}
+
+        //private void Back_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (mainFrame.CanGoBack) mainFrame.GoBack();
+        //}
+
+        //private void Next_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (mainFrame.CanGoForward) mainFrame.GoForward();
+        //}
+
+        //private void hamburgerButton_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
 
         //private async void SayHello_ClickAsync(object sender, RoutedEventArgs e)
         //{
