@@ -40,6 +40,26 @@ namespace UWP_FirstApp
             if (Page1.IsSelected) mainFrame.Navigate(typeof(Page1));
             else if (Page2.IsSelected) mainFrame.Navigate(typeof(Page2));
             else mainFrame.Navigate(typeof(Page3));
+            ChangeTitle();
+        }
+
+        private void ChangeTitle()
+        {
+            if (mainFrame.CurrentSourcePageType == typeof(Page1))
+            {
+                Back.Visibility = Visibility.Collapsed;
+                PageTitle.Text = "Page 1";
+            }
+            else if (mainFrame.CurrentSourcePageType == typeof(Page2))
+            {
+                Back.Visibility = Visibility.Visible;
+                PageTitle.Text = "Page 2";
+            }
+            else if (mainFrame.CurrentSourcePageType == typeof(Page3))
+            {
+                Back.Visibility = Visibility.Visible;
+                PageTitle.Text = "Page 3";
+            }
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
@@ -52,10 +72,11 @@ namespace UWP_FirstApp
         //    mainFrame.Navigate(typeof(Page1));
         //}
 
-        //private void Back_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (mainFrame.CanGoBack) mainFrame.GoBack();
-        //}
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainFrame.CanGoBack) mainFrame.GoBack();
+            ChangeTitle();
+        }
 
         //private void Next_Click(object sender, RoutedEventArgs e)
         //{

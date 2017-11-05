@@ -7,24 +7,69 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <Button Content="Click me" Click="Button_Click"/>
-        <SplitView x:Name="splitView" CompactPaneLength="50" DisplayMode="CompactOverlay" OpenPaneLength="200" PaneBackground="BurlyWood">
-            <SplitView.Pane>
-                <StackPanel>
-                    <TextBlock Text="One"/>
-                    <TextBlock Text="Two"/>
-                    <TextBlock Text="Three"/>
-                </StackPanel>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <StackPanel>
-                    <TextBlock Text="Four"/>
-                    <TextBlock Text="Five"/>
-                    <TextBlock Text="Six"/>
-                </StackPanel>
-            </SplitView.Content>
-        </SplitView>
-        <HyperlinkButton Content="Go to page 2" Click="HyperlinkButton_Click"/>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Check Box" VerticalAlignment="Center"/>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <CheckBox x:Name="MyCheckBox" 
+                      Content="Check?"
+                      Tapped="MyCheckBox_Tapped"/>
+            <TextBlock x:Name="CheckBoxResult"/>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Text="List Box" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <RadioButton x:Name="YesRadioButton"
+                         Content="Yes"
+                         GroupName="MyGroup"
+                         Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="NoRadioButton"
+                         Content="No"
+                         GroupName="MyGroup"
+                         Checked="RadioButton_Checked"/>
+            <TextBlock x:Name="RadioButtonResult"/>
+        </StackPanel>
+        <TextBlock Grid.Row="2" Text="Combo Box" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <ComboBox SelectionChanged="MyComboBox_SelectionChanged">
+                <ComboBoxItem Content="One" IsSelected="True"/>
+                <ComboBoxItem Content="Two"/>
+                <ComboBoxItem Content="Three"/>
+            </ComboBox>
+            <TextBlock x:Name="ComboBoxResult"/>
+        </StackPanel>
+        <TextBlock Grid.Row="3" Text="List Box" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <ListBox x:Name="MyListBox"
+                     SelectionMode="Extended"
+                     SelectionChanged="MyListBox_SelectionChanged">
+                <ListBoxItem Content="Four"/>
+                <ListBoxItem Content="Five"/>
+                <ListBoxItem Content="Six"/>
+            </ListBox>
+            <TextBlock x:Name="ListBoxResult"/>
+        </StackPanel>
+        <TextBlock Grid.Row="4" Text="Toggle Button" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <ToggleButton x:Name="MyToggleButton"
+                          Click="MyToggleButton_Click"
+                          Content="Enable?"/>
+            <TextBlock x:Name="ToggleButtonResult"/>
+        </StackPanel>
+        <TextBlock Grid.Row="5" Text="Toggle Switch" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,10">
+            <ToggleSwitch x:Name="MyToggleSwitch" Toggled="MyToggleSwitch_Toggled"/>
+            <TextBlock x:Name="ToggleSwitchResult"/>
+        </StackPanel>
+    </Grid>
 </Page>

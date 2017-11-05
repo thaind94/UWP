@@ -22,36 +22,44 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <RelativePanel>
-            <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="36" Click="hamburgerButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <RelativePanel Width="Auto" Grid.ColumnSpan="2">
+            <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="20" Click="hamburgerButton_Click"/>
+            <Button x:Name="Back" FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" FontSize="20" Click="Back_Click" RelativePanel.RightOf="HamburgerButton"/>
+            <TextBlock x:Name="PageTitle" RelativePanel.RightOf="Back" FontSize="20"/>
+            <Button x:Name="SearchButton" FontFamily="Segoe MDL2 Assets" Content="&#xE1A3;" FontSize="20" RelativePanel.AlignRightWithPanel="True"/>
+            <TextBox PlaceholderText="Search" Background="LightGray" RelativePanel.LeftOf="SearchButton" Width="200"/>
         </RelativePanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <SplitView x:Name="splitView"
                    DisplayMode="CompactOverlay"
                    OpenPaneLength="200"
-                   CompactPaneLength="56"
+                   CompactPaneLength="45"
                    HorizontalAlignment="Left">
                 <SplitView.Content>
-                    <Frame x:Name="mainFrame" Grid.Row="1">
+                    <Frame x:Name="mainFrame">
                     </Frame>
                 </SplitView.Content>
                 <SplitView.Pane>
                     <ListView SelectionMode="Single" x:Name="IconsListView" SelectionChanged="IconsListView_SelectionChanged" Background="Orchid">
                         <ListViewItem x:Name="Page1" IsSelected="True">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC71;" FontSize="36"/>
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC71;" FontSize="20"/>
                                 <TextBlock Text="Go to page 1" Margin="20,0,0,0"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem x:Name="Page2">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC76;" FontSize="36"/>
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC76;" FontSize="20"/>
                                 <TextBlock Text="Go to page 2" Margin="20,0,0,0"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem x:Name="Page3">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC77;" FontSize="36"/>
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC77;" FontSize="20"/>
                                 <TextBlock Text="Go to page 3" Margin="20,0,0,0"/>
                             </StackPanel>
                         </ListViewItem>

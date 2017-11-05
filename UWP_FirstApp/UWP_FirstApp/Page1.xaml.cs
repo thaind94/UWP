@@ -27,14 +27,42 @@ namespace UWP_FirstApp
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void MyCheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            splitView.IsPaneOpen = !splitView.IsPaneOpen;
+            CheckBoxResult.Text = (bool)MyCheckBox.IsChecked ? "True" : "False";
+            if(CheckBoxResult.Text == "True")
+            {
+
+            }
+        }
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButtonResult.Text = (bool)YesRadioButton.IsChecked ? "Yes" : "No";
         }
 
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private void MyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Frame.Navigate(typeof(Page2));
+            if (ComboBoxResult == null) return;
+            var combo = (ComboBox)sender;
+            var selectedItem = (ComboBoxItem)combo.SelectedItem;
+            ComboBoxResult.Text = selectedItem.Content.ToString();
+        }
+
+        private void MyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItems = MyListBox.Items.Cast<ListBoxItem>().Where(item => item.IsSelected).Select(item => item.Content.ToString()).ToArray();
+            ListBoxResult.Text = string.Join(",", selectedItems);
+        }
+
+        private void MyToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButtonResult.Text = (bool)MyToggleButton.IsChecked ? "Enabled" : "Disabled";
+        }
+
+        private void MyToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitchResult.Text = MyToggleSwitch.IsOn.ToString();
         }
     }
 }
