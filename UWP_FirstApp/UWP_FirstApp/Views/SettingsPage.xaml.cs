@@ -15,27 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace UWP_FirstApp
+namespace UWP_FirstApp.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Page3 : Page
+    public sealed partial class SettingsPage : Page
     {
-        public Page3()
+        public SettingsPage()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            textBlock.Text = (string)e.Parameter ?? string.Empty;
-        }
-
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Page1));
         }
     }
 }

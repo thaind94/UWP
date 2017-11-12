@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP_FirstApp.Services.Navigation;
+using UWP_FirstApp.ViewModels;
+using UWP_FirstApp.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -22,6 +26,8 @@ namespace UWP_FirstApp
     /// </summary>
     sealed partial class App : Application
     {
+        private IContainer _container;
+        private MainNavigation rootPage;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,36 +45,80 @@ namespace UWP_FirstApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
+            InitWindow(skipWindowCreation : e.PrelaunchActivated);
+            //Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            //if (rootFrame == null)
+            //{
+            //    // Create a Frame to act as the navigation context and navigate to the first page
+            //    rootFrame = new Frame();
+
+            //    rootFrame.NavigationFailed += OnNavigationFailed;
+
+            //    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            //    {
+            //        //TODO: Load state from previously suspended application
+            //    }
+
+            //    // Place the frame in the current Window
+            //    Window.Current.Content = rootFrame;
+            //}
+
+            //if (e.PrelaunchActivated == false)
+            //{
+            //    if (rootFrame.Content == null)
+            //    {
+            //        // When the navigation stack isn't restored navigate to the first page,
+            //        // configuring the new page by passing required information as a navigation
+            //        // parameter
+            //        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+            //    }
+            //    // Ensure the current window is active
+            //    Window.Current.Activate();
+            //}
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            InitWindow(skipWindowCreation: false);
+
+            if (args.Kind == ActivationKind.Protocol)
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                Window.Current.Activate();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                // Tasks after activation
             }
+        }
 
-            if (e.PrelaunchActivated == false)
+        private void InitWindow(bool skipWindowCreation)
+        {
+            var builder = new ContainerBuilder();
+
+            rootPage = Window.Current.Content as MainNavigation;
+
+            if (rootPage == null && !skipWindowCreation)
             {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
+                rootPage = new MainNavigation();
+
+                FrameAdapter adapter = new FrameAdapter(rootPage.AppFrame);
+
+                builder.RegisterInstance(adapter).AsImplementedInterfaces();
+
+                builder.RegisterType<HomeViewModel>();
+
+                builder.RegisterType<NavigationService>()
+                        .AsImplementedInterfaces()
+                        .SingleInstance();
+
+                _container = builder.Build();
+
+                rootPage.InitializeNavigationService(_container.Resolve<INavigationService>());
+
+                adapter.NavigationFailed += OnNavigationFailed;
+
+                Window.Current.Content = rootPage;
                 Window.Current.Activate();
             }
         }
