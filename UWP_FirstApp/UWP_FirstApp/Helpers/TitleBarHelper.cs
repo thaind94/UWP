@@ -33,6 +33,14 @@ namespace UWP_FirstApp.Helpers
             }
         }
 
+        public CoreApplicationViewTitleBar TitleBar
+        {
+            get
+            {
+                return _coreTitleBar;
+            }
+        }
+
         public Thickness TitlePosition
         {
             get

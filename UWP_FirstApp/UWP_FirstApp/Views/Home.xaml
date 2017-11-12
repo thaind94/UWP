@@ -5,9 +5,14 @@
     xmlns:local="using:UWP_FirstApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="{x:Bind HomeTheme}"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{x:Bind HomeBackGround}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="310"></RowDefinition>
+        </Grid.RowDefinitions>
         <TextBlock Text="Hello" FontSize="40" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>

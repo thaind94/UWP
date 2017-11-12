@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:RS3="using:Windows.UI.Xaml.Controls?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:appmodel="using:Windows.ApplicationModel"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Grid x:Name="NavRootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -55,5 +56,8 @@
                    VerticalAlignment="Top" 
                    Text="{x:Bind appmodel:Package.Current.DisplayName}">
         </TextBlock>
+        <TextBlock x:Name="test" FontSize="40" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
     </Grid>
 </Page>

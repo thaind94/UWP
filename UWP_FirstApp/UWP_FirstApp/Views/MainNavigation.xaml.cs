@@ -27,8 +27,8 @@ namespace UWP_FirstApp.Views
     public sealed partial class MainNavigation : Page
     {
         private static MainNavigation _instance;
-
         private INavigationService _navigationService;
+        private bool hasLoadedPreviously;
 
         public MainNavigation()
         {
@@ -81,18 +81,18 @@ namespace UWP_FirstApp.Views
                 case "Home":
                     _navigationService.NavigateToHomeAsync();
                     break;
-                //case "Now playing":
-                //    _navigationService.NavigateToNowPlayingAsync();
-                //    break;
-                //case "Favorites":
-                //    _navigationService.NavigateToFavoritesAsync();
-                //    break;
-                //case "Notes":
-                //    _navigationService.NavigateToNotesAsync();
-                //    break;
-                //case "Downloads":
-                //    _navigationService.NavigateToDownloadsAsync();
-                //    break;
+                    //case "Now playing":
+                    //    _navigationService.NavigateToNowPlayingAsync();
+                    //    break;
+                    //case "Favorites":
+                    //    _navigationService.NavigateToFavoritesAsync();
+                    //    break;
+                    //case "Notes":
+                    //    _navigationService.NavigateToNotesAsync();
+                    //    break;
+                    //case "Downloads":
+                    //    _navigationService.NavigateToDownloadsAsync();
+                    //    break;
             }
         }
 
@@ -107,11 +107,35 @@ namespace UWP_FirstApp.Views
 
         private void AppNavFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            var ignored = DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            switch (e.SourcePageType)
             {
-                var nav = SystemNavigationManager.GetForCurrentView();
-                nav.AppViewBackButtonVisibility = _navigationService.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-            });
+                case Type c when e.SourcePageType == typeof(Home):
+                    ((NavigationViewItem)navview.MenuItems[0]).IsSelected = true;
+                    break;
+                //case Type c when e.SourcePageType == typeof(Player):
+                //    ((NavigationViewItem)navview.MenuItems[1]).IsSelected = true;
+                //    break;
+                //case Type c when e.SourcePageType == typeof(Favorites):
+                //    ((NavigationViewItem)navview.MenuItems[2]).IsSelected = true;
+                //    break;
+                //case Type c when e.SourcePageType == typeof(Notes):
+                //    ((NavigationViewItem)navview.MenuItems[3]).IsSelected = true;
+                //    break;
+                //case Type c when e.SourcePageType == typeof(Downloads):
+                //    ((NavigationViewItem)navview.MenuItems[4]).IsSelected = true;
+                //    break;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!hasLoadedPreviously)
+            {
+                _navigationService.NavigateToHomeAsync();
+                hasLoadedPreviously = true;
+            }
+
+
         }
     }
 }

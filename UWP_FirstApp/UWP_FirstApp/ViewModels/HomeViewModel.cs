@@ -7,7 +7,7 @@ using UWP_FirstApp.Services.Navigation;
 
 namespace UWP_FirstApp.ViewModels
 {
-    class HomeViewModel
+    public class HomeViewModel
     {
         private INavigationService _navigationService;
 

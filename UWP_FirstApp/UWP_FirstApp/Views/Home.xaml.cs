@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP_FirstApp.Services;
+using UWP_FirstApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +27,24 @@ namespace UWP_FirstApp.Views
         public Home()
         {
             this.InitializeComponent();
+        }
+
+        public HomeViewModel ViewModel { get; set; }
+
+        public ElementTheme HomeTheme
+        {
+            get
+            {
+                return ThemeSelectorService.GetHomeTheme();
+            }
+        }
+
+        public Style HomeBackGround
+        {
+            get
+            {
+                return ThemeSelectorService.GetHomeBackground();
+            }
         }
     }
 }

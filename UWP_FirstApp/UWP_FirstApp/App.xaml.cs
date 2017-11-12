@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using UWP_FirstApp.Services;
 using UWP_FirstApp.Services.Navigation;
 using UWP_FirstApp.ViewModels;
 using UWP_FirstApp.Views;
@@ -46,6 +48,8 @@ namespace UWP_FirstApp
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             InitWindow(skipWindowCreation : e.PrelaunchActivated);
+
+            StartupAsync();
             //Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -121,6 +125,13 @@ namespace UWP_FirstApp
                 Window.Current.Content = rootPage;
                 Window.Current.Activate();
             }
+        }
+
+        private void StartupAsync()
+        {
+            ThemeSelectorService.SetRequestedTheme();
+            //await FeedStore.CheckDownloadsPresent();
+            //await Task.CompletedTask;
         }
 
         /// <summary>
